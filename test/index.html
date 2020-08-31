@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body,
+      html {
+        margin: 0;
+        padding: 0;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      .drag-letter {
+        width: 100%;
+        margin-bottom: 8px;
+        padding: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: white;
+        border: 1px solid grey;
+      }
+      .row {
+        display: flex;
+        justify-content: space-between;
+      }
+      .col {
+        min-width: 45%;
+      }
+      #target-col {
+        border: 2px dashed grey;
+        position: relative;
+      }
+      .draggable {
+        user-select: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div class="row">
+        <div class="col" id="source-col"></div>
+        <div class="col droppable" id="target-col"></div>
+      </div>
+    </div>
+
+    <script src="../dist/drag-drop.js"></script>
+    <script>
+      (function () {
+        const srcCol = document.getElementById("source-col");
+
+        for (i = 0; i < 26; i++) {
+          const letter = (i + 10).toString(36);
+          const div = document.createElement("div");
+          div.innerHTML = letter;
+          div.classList.add("draggable");
+          div.classList.add("drag-letter");
+          div.setAttribute("data-dragtarget", letter);
+          div.addEventListener("dragtargetdrop", (evt) => {
+            if (evt.detail.onDropTarget) {
+              div.parentElement.removeChild(div);
+              evt.detail.dropTarget.element.appendChild(div);
+            }
+          });
+          srcCol.appendChild(div);
+        }
+
+        dragDrop.initialize();
+        document.querySelectorAll(".draggable").forEach((el) => {
+          el.addEventListener("dragtargetdrop", (evt) => {
+            if (evt.detail.onDropTarget) {
+            }
+          });
+        });
+        document.querySelectorAll(".droppable").forEach((el) => {
+          el.addEventListener("droptargetstart", (e) => {
+            e.target.classList.add("drop-over");
+          });
+        });
+        document.querySelectorAll(".droppable").forEach((el) => {
+          el.addEventListener("droptargetend", (e) => {
+            e.target.classList.remove("drop-over");
+          });
+        });
+        document.querySelectorAll(".droppable").forEach((el) => {
+          el.addEventListener("droptargetdrop", (e) => {
+            e.target.classList.remove("drop-over");
+          });
+        });
+      })();
+    </script>
+  </body>
+</html>

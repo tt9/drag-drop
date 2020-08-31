@@ -1,0 +1,24 @@
+{
+  "name": "drag-drop",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack",
+    "build:dev": "webpack --config webpack.dev.config.js",
+    "watch": "webpack --config webpack.dev.config.js --watch",
+    "start": "http-server"
+  },
+  "author": "Tyler Thomas",
+  "license": "MIT",
+  "devDependencies": {
+    "css-loader": "^4.2.2",
+    "mini-css-extract-plugin": "^0.11.0",
+    "style-loader": "^1.2.1",
+    "ts-loader": "^8.0.3",
+    "typescript": "^4.0.2",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12"
+  }
+}
